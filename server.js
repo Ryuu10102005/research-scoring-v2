@@ -8,25 +8,6 @@ const port = process.env.PORT || 5500;
 
 app.use(bodyParser.json());
 app.use(cors());
-
-app.get('/api/journals', async (req, res) => {
-  try {
-     const pool = await connectDB();
-     const [rows] = await pool.query(`
-      SELECT 
-        journal_name AS name,
-        'Unknown' AS category,
-        'N/A' AS issn,
-        0 AS sjr, 
-        0 AS flagship
-      FROM Journals
-    `);
-    res.json(rows);
-  } catch (err) {
-    console.error('❌ Error loading journals:', err);
-    res.status(500).json({ error: 'Không thể tải dữ liệu từ MySQL.' });
-  }
-});
 app.post('/api/calculate', async (req, res) => {
   try {
     const {

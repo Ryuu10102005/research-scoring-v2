@@ -118,7 +118,7 @@ document.getElementById('scoreForm').addEventListener('submit', async (e) => {
   statusMessage.style.display = 'none';
 
   try {
-    const response = await fetch('http://localhost:5500/api/calculate', {
+    const response = await fetch(`${window.location.origin}/api/calculate`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
     });
     if (!response.ok) throw new Error('Lỗi kết nối Server');
