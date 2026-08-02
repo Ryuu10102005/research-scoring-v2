@@ -34,7 +34,13 @@ app.post('/api/calculate', async (req, res) => {
     res.status(500).json({ error: "Lỗi tính toán hoặc kết nối MySQL" });
   }
 });
+const path = require('path');
 
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 app.listen(port, () => {
   console.log(`✅ Backend Server đang chạy tại: http://localhost:${port}`);
 });
